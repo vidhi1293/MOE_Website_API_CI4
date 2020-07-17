@@ -126,5 +126,4 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
-vidhi/*.txt
-git/*.txt
+vidhi/test.txt
