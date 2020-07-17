@@ -1,0 +1,3271 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MOE Website CI4",
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/). For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": ""
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "http://localhost/MOE_Website_API_CI4/"
+    },
+    {
+      "url": "https://localhost/OESS_MOE_Website_API/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Common",
+      "description": "All the api for Common modules"
+    },
+    {
+      "name": "Admin",
+      "description": "All the api for Admin panel"
+    },
+    {
+      "name": "User",
+      "description": "All the api for User panel"
+    },
+    {
+      "name": "Frontend",
+      "description": "All the api for Frontend panel"
+    }
+  ],
+  "paths": {
+    "/Common/Auth/login": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Login for the system",
+        "requestBody": {
+          "description": "Login Credentails",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "EmailAddress",
+                  "Password"
+                ],
+                "type": "object",
+                "properties": {
+                  "EmailAddress": {
+                    "type": "string"
+                  },
+                  "Password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid Login",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/Auth/logout": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Logout for the system",
+        "requestBody": {
+          "description": "Logout Credentails",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful logout",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/User/getStateByCountryId/{CountryId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get State by CountryId",
+        "parameters": [
+          {
+            "name": "CountryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/User/getById/{UserId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get User by UserId",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "path",
+            "description": "UserId of User that needs to be get data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/User/isActiveChange": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "IsActive changes for user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "IsActive",
+                  "UpdatedBy",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "IsActive": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "UpdatedBy": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful changes",
+            "content": {}
+          },
+          "400": {
+            "description": "License Pack not available",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/User/UpdateByAdmin": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update a user",
+        "description": "admin can change user`s personal details only",
+        "requestBody": {
+          "description": "User details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "UserId",
+                  "FirstName",
+                  "MiddleName",
+                  "LastName",
+                  "PhoneNumber",
+                  "EmailAddress",
+                  "CompanyId",
+                  "CompanyName",
+                  "CompanyEmail",
+                  "Website",
+                  "CPhoneNumber",
+                  "AddressId",
+                  "Address1",
+                  "Address2",
+                  "City",
+                  "StateId",
+                  "CountryId",
+                  "ZipCode",
+                  "IsActive",
+                  "UpdatedBy",
+                  "LoginURL"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "MiddleName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "PhoneNumber": {
+                    "type": "string"
+                  },
+                  "EmailAddress": {
+                    "type": "string"
+                  },
+                  "AddressId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Address1": {
+                    "type": "string"
+                  },
+                  "Address2": {
+                    "type": "string"
+                  },
+                  "City": {
+                    "type": "string"
+                  },
+                  "StateId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CountryId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ZipCode": {
+                    "type": "string"
+                  },
+                  "CompanyId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CompanyName": {
+                    "type": "string"
+                  },
+                  "CompanyEmail": {
+                    "type": "string"
+                  },
+                  "Website": {
+                    "type": "string"
+                  },
+                  "CPhoneNumber": {
+                    "type": "string"
+                  },
+                  "IsActive": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "UpdatedBy": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "LoginURL": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Update",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/User/UpdatePersonalDetails": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update User Personal Details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "UserId",
+                  "FirstName",
+                  "MiddleName",
+                  "LastName",
+                  "PhoneNumber",
+                  "EmailAddress",
+                  "AddressId",
+                  "Address1",
+                  "Address2",
+                  "City",
+                  "StateId",
+                  "CountryId",
+                  "ZipCode"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "MiddleName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "PhoneNumber": {
+                    "type": "string"
+                  },
+                  "EmailAddress": {
+                    "type": "string"
+                  },
+                  "AddressId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Address1": {
+                    "type": "string"
+                  },
+                  "Address2": {
+                    "type": "string"
+                  },
+                  "City": {
+                    "type": "string"
+                  },
+                  "StateId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CountryId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ZipCode": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Update",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/User/UpdateCompanyDetails": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update User Company Details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "UserId",
+                  "CompanyId",
+                  "CompanyName",
+                  "CompanyEmail",
+                  "Website",
+                  "PhoneNumber"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CompanyId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CompanyName": {
+                    "type": "string"
+                  },
+                  "CompanyEmail": {
+                    "type": "string"
+                  },
+                  "Website": {
+                    "type": "string"
+                  },
+                  "PhoneNumber": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Update",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Password/forgot": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Forgot password",
+        "requestBody": {
+          "description": "Credentail Details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "EmailAddress",
+                  "ResetPasswordURL"
+                ],
+                "type": "object",
+                "properties": {
+                  "EmailAddress": {
+                    "type": "string"
+                  },
+                  "ResetPasswordURL": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful forgot",
+            "content": {}
+          },
+          "400": {
+            "description": "This email address not found",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/Password/checkResetLink": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Check this reset link is valid or not",
+        "requestBody": {
+          "description": "Credentail Details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "ForgotPasswordCode",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ForgotPasswordCode": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/Password/reset": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Reset the password",
+        "requestBody": {
+          "description": "Credentail Details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "ForgotPasswordURL",
+                  "LoginURL",
+                  "Password",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Password": {
+                    "type": "string"
+                  },
+                  "LoginURL": {
+                    "type": "string"
+                  },
+                  "ForgotPasswordURL": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful reset",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/Password/change": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Change the password",
+        "requestBody": {
+          "description": "Credentail Details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "OldPassword",
+                  "Password",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Password": {
+                    "type": "string"
+                  },
+                  "OldPassword": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful change",
+            "content": {}
+          },
+          "400": {
+            "description": "Incorrect old password",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/isActiveChange": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "IsActive changes for all",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "FieldName",
+                  "Id",
+                  "IsActive",
+                  "Module",
+                  "ModuleId",
+                  "TableName",
+                  "UpdatedBy"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "IsActive": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "UpdatedBy": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "TableName": {
+                    "type": "string"
+                  },
+                  "FieldName": {
+                    "type": "string"
+                  },
+                  "Module": {
+                    "type": "string"
+                  },
+                  "ModuleId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful changes",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/delete": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Delete function for all",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "FieldName",
+                  "Id",
+                  "Module",
+                  "ModuleId",
+                  "TableName",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "TableName": {
+                    "type": "string"
+                  },
+                  "FieldName": {
+                    "type": "string"
+                  },
+                  "Module": {
+                    "type": "string"
+                  },
+                  "ModuleId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Delete successfully",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Country/addUpdate": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Add/Update for country",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "CountryAbbreviation",
+                  "CountryId",
+                  "CountryName",
+                  "IsActive",
+                  "PhonePrefix",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "CountryId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CountryName": {
+                    "type": "string"
+                  },
+                  "CountryAbbreviation": {
+                    "type": "string"
+                  },
+                  "PhonePrefix": {
+                    "type": "string"
+                  },
+                  "IsActive": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Dublicate Country Abbreviation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Country/getById/{CountryId}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get Country by CountryId",
+        "parameters": [
+          {
+            "name": "CountryId",
+            "in": "path",
+            "description": "CountryId of Country that needs to be get data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/Country/getAll/{IsActive}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get all Country",
+        "description": "if you want only active data then pass IsActive as 1 otherwise pass 2",
+        "parameters": [
+          {
+            "name": "IsActive",
+            "in": "path",
+            "description": "IsActive of Country that needs to be get active/all data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/State/addUpdate": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Add/Update for state",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "CountryId",
+                  "IsActive",
+                  "StateAbbreviation",
+                  "StateId",
+                  "StateName",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "StateId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CountryId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "StateName": {
+                    "type": "string"
+                  },
+                  "StateAbbreviation": {
+                    "type": "string"
+                  },
+                  "IsActive": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Dublicate State Abbreviation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/State/getById/{StateId}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get State by StateId",
+        "parameters": [
+          {
+            "name": "StateId",
+            "in": "path",
+            "description": "StateId of State that needs to be get data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/State/getAll/{IsActive}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get all State",
+        "description": "if you want only active data then pass IsActive as 1 otherwise pass 2",
+        "parameters": [
+          {
+            "name": "IsActive",
+            "in": "path",
+            "description": "IsActive of State that needs to be get active/all data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/AuditLog/getActivityLogs": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get All Activity Logs",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/AuditLog/getEmailLogs": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get All Email Logs",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/AuditLog/getErrorLogs": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get All Error Logs",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/AuditLog/getRecentAuditLogs": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get 5 Recent Audit Logs",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/ContactUs/getDefaultData": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get Default ContactUs Data",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/ContactUs/getAll": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get All ContactUs",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/ContactUs/addUpdate": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Add/Update for ContactUs",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "CategoryId",
+                  "ContactUsId",
+                  "IsActive",
+                  "LoginURL",
+                  "Message",
+                  "ModuleId",
+                  "UserId",
+                  "FirstName",
+                  "LastName"
+                ],
+                "type": "object",
+                "properties": {
+                  "ContactUsId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ModuleId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CategoryId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Message": {
+                    "type": "string"
+                  },
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "IsActive": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "LoginURL": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Notification/getAll/{UserId}/{RoleId}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get all notification by userid and roleid",
+        "description": "If you want to get notification only for that user then pass 0 as RoleId",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "RoleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Notification/getRecent/{UserId}/{RoleId}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get recent notification by userid and roleid",
+        "description": "If you want to get notification only for that user then pass 0 as RoleId",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "RoleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Notification/ClearDismiss": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Clear/Dismiss Notification",
+        "requestBody": {
+          "description": "Get ClearAll for Type=1, Clear for Type=2, Dismiss for Type=3 and if you choose type 1 then pass RoleId in NotificationId",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "NotificationId",
+                  "Type"
+                ],
+                "type": "object",
+                "properties": {
+                  "NotificationId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Type": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Configuration/getAll": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get All Configuration data",
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Configuration/Update": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Update all Configuration",
+        "description": "Post a data same like get data result",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "CurrencyType",
+                  "DiscountType",
+                  "UserStatus",
+                  "CategoryForContactUs",
+                  "ToolTrailDays",
+                  "ToolTrailLicenses",
+                  "Tax",
+                  "ValidatorType",
+                  "ContactDetails"
+                ],
+                "type": "object",
+                "properties": {
+                  "CurrencyType": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "DisplayText": {
+                          "type": "string"
+                        },
+                        "ConfigurationId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "DiscountType": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "DisplayText": {
+                          "type": "string"
+                        },
+                        "ConfigurationId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "UserStatus": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "DisplayText": {
+                          "type": "string"
+                        },
+                        "ConfigurationId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "CategoryForContactUs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Value": {
+                          "type": "string"
+                        },
+                        "ConfigurationId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "ToolTrailDays": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Value": {
+                          "type": "string"
+                        },
+                        "ConfigurationId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "ToolTrailLicenses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Value": {
+                          "type": "string"
+                        },
+                        "ConfigurationId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "Tax": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Value": {
+                          "type": "string"
+                        },
+                        "ConfigurationId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "ValidatorType": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "DisplayText": {
+                          "type": "string"
+                        },
+                        "ConfigurationId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "ContactDetails": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Value": {
+                          "type": "string"
+                        },
+                        "ConfigurationId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/EmailTemplate/addUpdate": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Add/Update for EmailTemplate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "Bcc",
+                  "BccEmail",
+                  "Cc",
+                  "EmailBody",
+                  "EmailTemplateId",
+                  "IsActive",
+                  "ModuleId",
+                  "Subject",
+                  "To",
+                  "TokenId",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "EmailTemplateId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ModuleId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "TokenId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Subject": {
+                    "type": "string"
+                  },
+                  "EmailBody": {
+                    "type": "string"
+                  },
+                  "To": {
+                    "type": "string"
+                  },
+                  "Cc": {
+                    "type": "string"
+                  },
+                  "Bcc": {
+                    "type": "string"
+                  },
+                  "BccEmail": {
+                    "type": "string"
+                  },
+                  "IsActive": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/EmailTemplate/getById/{EmailTemplateId}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get EmailTemplate by EmailTemplateId",
+        "parameters": [
+          {
+            "name": "EmailTemplateId",
+            "in": "path",
+            "description": "EmailTemplateId of EmailTemplate that needs to be get data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/EmailTemplate/getAll/{IsActive}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get all EmailTemplates",
+        "description": "if you want only active data then pass IsActive as 1 otherwise pass 2",
+        "parameters": [
+          {
+            "name": "IsActive",
+            "in": "path",
+            "description": "IsActive of EmailTemplate that needs to be get active/all data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/EmailTemplate/getAllDefault": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get all default EmailTemplate data",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/DiscountCoupon/addUpdate": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Add/Update for DiscountCoupon",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "CouponId",
+                  "CouponCode",
+                  "ValidFrom",
+                  "ValidTo",
+                  "DiscountTypeId",
+                  "ValidatorTypeId",
+                  "ValidatorValue",
+                  "Value",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "CouponId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CouponCode": {
+                    "type": "string"
+                  },
+                  "ValidFrom": {
+                    "type": "string"
+                  },
+                  "ValidTo": {
+                    "type": "string"
+                  },
+                  "DiscountTypeId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ValidatorTypeId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ValidatorValue": {
+                    "type": "string"
+                  },
+                  "Value": {
+                    "type": "string"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/DiscountCoupon/getById/{DiscountCouponId}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get EmailTemplate by DiscountCouponId",
+        "parameters": [
+          {
+            "name": "DiscountCouponId",
+            "in": "path",
+            "description": "DiscountCouponId of DiscountCoupon that needs to be get data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/DiscountCoupon/getAll/{IsActive}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get all DiscountCoupon",
+        "description": "if you want only active data then pass IsActive as 1 otherwise pass 2",
+        "parameters": [
+          {
+            "name": "IsActive",
+            "in": "path",
+            "description": "IsActive of DiscountCoupon that needs to be get active/all data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/DiscountCoupon/getAllDefault": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get all default DiscountCoupon data",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Common/DiscountCoupon/SendCouponCode": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Send DiscountCoupon to Users",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "CouponId",
+                  "CouponCode",
+                  "ValidFrom",
+                  "ValidTo",
+                  "ValidatorValue",
+                  "AllEmails"
+                ],
+                "type": "object",
+                "properties": {
+                  "CouponId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CouponCode": {
+                    "type": "string"
+                  },
+                  "ValidFrom": {
+                    "type": "string"
+                  },
+                  "ValidTo": {
+                    "type": "string"
+                  },
+                  "ValidatorValue": {
+                    "type": "string"
+                  },
+                  "AllEmails": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Module/addUpdate": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Add/Update for Modules",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "ModuleId",
+                  "ModuleName",
+                  "Features",
+                  "IsActive",
+                  "Icon",
+                  "ShortDescription",
+                  "AboutModule",
+                  "Video",
+                  "ScreenShot1",
+                  "ScreenShot2",
+                  "ScreenShot3",
+                  "ModulePriceId",
+                  "USDMonthlyPrice",
+                  "USDYearlyPrice",
+                  "UserId"
+                ],
+                "type": "object",
+                "properties": {
+                  "ModuleId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ModuleName": {
+                    "type": "string"
+                  },
+                  "Features": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "IsActive": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Icon": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ShortDescription": {
+                    "type": "string"
+                  },
+                  "AboutModule": {
+                    "type": "string"
+                  },
+                  "Video": {
+                    "type": "string"
+                  },
+                  "ScreenShot1": {
+                    "type": "string"
+                  },
+                  "ScreenShot2": {
+                    "type": "string"
+                  },
+                  "ScreenShot3": {
+                    "type": "string"
+                  },
+                  "ModulePriceId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "USDMonthlyPrice": {
+                    "type": "string"
+                  },
+                  "USDYearlyPrice": {
+                    "type": "string"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Duplicate",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Module/getById/{ModuleId}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get Modules by ModuleId",
+        "parameters": [
+          {
+            "name": "ModuleId",
+            "in": "path",
+            "description": "ModuleId of Module that needs to be get data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Module/getAll/{IsActive}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get all Modules",
+        "description": "if you want only active data then pass IsActive as 1 otherwise pass 2",
+        "parameters": [
+          {
+            "name": "IsActive",
+            "in": "path",
+            "description": "IsActive of Modules that needs to be get active/all data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Order/getOrderList": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "get Order List",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "UserId",
+                  "InvoiceDate"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "InvoiceDate": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Order/getOrderDetailsByOrderId/{OrderId}": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get Order details by OrderId",
+        "parameters": [
+          {
+            "name": "OrderId",
+            "in": "path",
+            "description": "OrderId of Order that needs to be get data",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Order/getAllDefaultData": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Get all DefaultData for order",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Admin/getAllUsers": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Get all clients/users data",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/Admin/getUserViewById/{UserId}/{CompanyId}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Get User data data by UserId & companyId",
+        "description": "",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "CompanyId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Common/AdminDashboard/getAdminDashboardData": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Get all Admin Dashboard data",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/User/Dashboard/getDashboardData/{UserId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all client dashboard data",
+        "description": "",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/User/OrderCart/getCartDetailsByUserId/{UserId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all cart data by userid",
+        "description": "",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/User/OrderCart/UpdateCartDetails": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update cart details - CurrencyType,PlanDuration,Quantity",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "CartId",
+                  "Type",
+                  "Value"
+                ],
+                "type": "object",
+                "properties": {
+                  "CartId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Type": {
+                    "type": "string"
+                  },
+                  "Value": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Update",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/User/OrderCart/AddCartItem": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add cart Item - when check module in cart page",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "CartId",
+                  "UserId",
+                  "ModuleId",
+                  "Price",
+                  "TotalAmount"
+                ],
+                "type": "object",
+                "properties": {
+                  "CartId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ModuleId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Price": {
+                    "type": "string"
+                  },
+                  "TotalAmount": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Update",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/User/OrderCart/DeleteCartItem/{CartItemId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "delete cart item by CartItemId",
+        "description": "",
+        "parameters": [
+          {
+            "name": "CartItemId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfully",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/User/OrderCart/OrderCheckout": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "checkout final order and payment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "UserId",
+                  "BillingName",
+                  "Address1",
+                  "Address2",
+                  "City",
+                  "StateId",
+                  "CountryId",
+                  "ZipCode",
+                  "PhoneNumber",
+                  "SubTotalAmount",
+                  "TaxAmount",
+                  "DiscountCode",
+                  "DiscountAmount",
+                  "TotalAmount",
+                  "USDTotalAmount",
+                  "CurrencyType",
+                  "PlanDuration",
+                  "PaymentMode",
+                  "OrderNumber",
+                  "CartId",
+                  "Quantity",
+                  "ExpiredDate",
+                  "token_id",
+                  "email",
+                  "currency"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "BillingName": {
+                    "type": "string"
+                  },
+                  "Address1": {
+                    "type": "string"
+                  },
+                  "Address2": {
+                    "type": "string"
+                  },
+                  "City": {
+                    "type": "string"
+                  },
+                  "StateId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CountryId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ZipCode": {
+                    "type": "string"
+                  },
+                  "PhoneNumber": {
+                    "type": "string"
+                  },
+                  "SubTotalAmount": {
+                    "type": "string"
+                  },
+                  "TaxAmount": {
+                    "type": "string"
+                  },
+                  "DiscountCode": {
+                    "type": "string"
+                  },
+                  "DiscountAmount": {
+                    "type": "string"
+                  },
+                  "TotalAmount": {
+                    "type": "string"
+                  },
+                  "USDTotalAmount": {
+                    "type": "string"
+                  },
+                  "CurrencyType": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "PlanDuration": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "PaymentMode": {
+                    "type": "string"
+                  },
+                  "OrderNumber": {
+                    "type": "string"
+                  },
+                  "CartId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Quantity": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ExpiredDate": {
+                    "type": "string"
+                  },
+                  "token_id": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Update",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/User/OrderCart/getOrderDetailsByOrderId/{OrderId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all order data by OrderId",
+        "description": "",
+        "parameters": [
+          {
+            "name": "OrderId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Frontend/Home/RegistrationDefaultData": {
+      "get": {
+        "tags": [
+          "Frontend"
+        ],
+        "summary": "Get all default Registration data",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Frontend/Home/Registration": {
+      "post": {
+        "tags": [
+          "Frontend"
+        ],
+        "summary": "Registration for the system",
+        "requestBody": {
+          "description": "Registration data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "FirstName",
+                  "MiddleName",
+                  "LastName",
+                  "PhoneNumber",
+                  "EmailAddress",
+                  "Password",
+                  "Address1",
+                  "Address2",
+                  "Address3",
+                  "City",
+                  "StateId",
+                  "CountryId",
+                  "ZipCode",
+                  "CompanyName",
+                  "CompanyEmail",
+                  "Website",
+                  "CompanyPhoneNumber",
+                  "LoginURL"
+                ],
+                "type": "object",
+                "properties": {
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "MiddleName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "PhoneNumber": {
+                    "type": "string"
+                  },
+                  "EmailAddress": {
+                    "type": "string"
+                  },
+                  "Password": {
+                    "type": "string"
+                  },
+                  "Address1": {
+                    "type": "string"
+                  },
+                  "Address2": {
+                    "type": "string"
+                  },
+                  "Address3": {
+                    "type": "string"
+                  },
+                  "City": {
+                    "type": "string"
+                  },
+                  "StateId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CountryId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ZipCode": {
+                    "type": "string"
+                  },
+                  "CompanyName": {
+                    "type": "string"
+                  },
+                  "CompanyEmail": {
+                    "type": "string"
+                  },
+                  "Website": {
+                    "type": "string"
+                  },
+                  "CompanyPhoneNumber": {
+                    "type": "string"
+                  },
+                  "LoginURL": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Registration",
+            "content": {}
+          },
+          "400": {
+            "description": "This email address is already exists",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Frontend/Home/TrailRegistration": {
+      "post": {
+        "tags": [
+          "Frontend"
+        ],
+        "summary": "Trail Registration for the system",
+        "requestBody": {
+          "description": "Trail Registration data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "Name",
+                  "EmailAddress",
+                  "CompanyName",
+                  "LoginURL"
+                ],
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "type": "string"
+                  },
+                  "EmailAddress": {
+                    "type": "string"
+                  },
+                  "CompanyName": {
+                    "type": "string"
+                  },
+                  "LoginURL": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Registration",
+            "content": {}
+          },
+          "400": {
+            "description": "This email address is already exists",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Frontend/Home/getAllDefaultData": {
+      "get": {
+        "tags": [
+          "Frontend"
+        ],
+        "summary": "et all Data for Home Page",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Frontend/Home/getAllHeaderData/{UserId}": {
+      "get": {
+        "tags": [
+          "Frontend"
+        ],
+        "summary": "Get all Data for Header by UserId",
+        "description": "",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Frontend/Home/addToCart": {
+      "post": {
+        "tags": [
+          "Frontend"
+        ],
+        "summary": "Add Selected Modules to Cart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "UserId",
+                  "Licenses",
+                  "IsYearly",
+                  "CurrencyType",
+                  "SelectedModules"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Licenses": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "IsYearly": {
+                    "type": "boolean"
+                  },
+                  "CurrencyType": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "SelectedModules": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Total Cart Items",
+            "content": {}
+          },
+          "400": {
+            "description": "Dublicate Entry!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/Frontend/ModuleHome/getModuleById/{ModuleId}": {
+      "get": {
+        "tags": [
+          "Frontend"
+        ],
+        "summary": "Get Module details by Module_id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "ModuleId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Something is wrong!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Frontend/ModuleHome/addModuleToCart": {
+      "post": {
+        "tags": [
+          "Frontend"
+        ],
+        "summary": "Add Module to Cart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "UserId",
+                  "CurrencyType",
+                  "ModuleId"
+                ],
+                "type": "object",
+                "properties": {
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "CurrencyType": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "ModuleId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Total Cart Items",
+            "content": {}
+          },
+          "400": {
+            "description": "Dublicate Entry!",
+            "content": {}
+          },
+          "404": {
+            "description": "Something is wrong!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

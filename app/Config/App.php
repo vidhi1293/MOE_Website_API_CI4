@@ -265,4 +265,24 @@ class App extends BaseConfig
 	|   - http://www.w3.org/TR/CSP/
 	*/
 	public $CSPEnabled = false;
+
+	// Custom config 
+	// example for my paypal testing: 
+		public $thekey ='MOEsecret!'; 
+
+		public $allowed_cors_headers = [
+		'Authorization',
+		'Origin',
+		'X-Requested-With',
+		'Content-Type',
+		'Accept',
+		'Access-Control-Request-Method'
+	];
+
+	// public $stripe_key = 'pk_test_Pg2gdrVCs50BQijS8UmXvRJa00RgBLQTsN';
+	// public $stripe_secret = 'sk_test_5Wur76WQPA3Qd8ZvIxZM1523008KjkpiUz';
+
+	public $stripe_key = 'pk_test_MHAfUuQx0qo9YiakFP8KMX75009DxAx6R1';
+	public $stripe_secret = 'sk_test_DF6IgCBcv4l7bDVjSKQDQTY600DNRs4GsO';
+
 }
